@@ -149,7 +149,7 @@ public class BindViewHandle extends AbstractProcessor {
         String qualifiedName = typeElement.getQualifiedName().toString();
         AnnotationClass annotationClass = annotationClassHashMap.get(qualifiedName);
         if(annotationClass == null) {
-            annotationClass = new AnnotationClass(typeElement);
+            annotationClass = new AnnotationClass(elementUtils.getPackageOf(typeElement).getQualifiedName().toString(), typeElement);
             annotationClassHashMap.put(qualifiedName, annotationClass);
         }
         return annotationClass;
