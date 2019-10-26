@@ -39,4 +39,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        MyButterKnife.unBind(this);
+        super.onDestroy();
+    }
 }

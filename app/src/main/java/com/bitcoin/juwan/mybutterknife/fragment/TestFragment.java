@@ -46,4 +46,11 @@ public class TestFragment extends Fragment {
         });
         return inflate;
     }
+
+
+    @Override
+    public void onDestroyView() {
+        MyButterKnife.unBind(this);
+        super.onDestroyView();
+    }
 }

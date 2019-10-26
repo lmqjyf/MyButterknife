@@ -2,6 +2,7 @@ package com.bitcoin.juwan.mybutterknife;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 
 import com.bitcoin.juwan.annotations.BindView;
@@ -63,7 +64,7 @@ public class MyButterKnife {
         hostViewBinder.bindView(host, o, viewFinder);
     }
 
-    public static void unBind(Activity host) {
+    public static void unBind(Object host) {
         String hostName = host.getClass().getName();
         ViewBinder viewBinder = map.get(hostName);
         viewBinder.unBindView(host);

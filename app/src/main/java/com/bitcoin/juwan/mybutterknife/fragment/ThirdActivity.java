@@ -24,4 +24,10 @@ public class ThirdActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.frame_layout, TestFragment.newInstance()).commit();
     }
+
+    @Override
+    protected void onDestroy() {
+        MyButterKnife.unBind(this);
+        super.onDestroy();
+    }
 }
