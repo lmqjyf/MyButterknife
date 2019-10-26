@@ -75,9 +75,12 @@ public class BindViewHandle extends AbstractProcessor {
                     .addParameter(TypeName.get(typeElement.asType()), "host")
                     .addParameter(Object.class, "o")
                     .addParameter(ClassName.get("com.bitcoin.juwan.applibrary", "ViewFinder"), "viewFinder");
+
+
+
             for(BindViewField field : bindViewFieldList) {
-                bindViewMethodSpecBuilder.addStatement("host.$N = ($T)(viewFinder.findView(o, $N))",
-                     field.getFieldName(), ClassName.get(field.getTypeFieldName()), typeElement.getAnnotation(BindView.class).value());
+                bindViewMethodSpecBuilder.addStatement("host.$N = ($T)(viewFinder.findView(o, $L))",
+                     field.getFieldName(), ClassName.get(field.getTypeFieldName()), field.getResId());
             }
 
             MethodSpec.Builder unBindViewMethodSpecBuilder = MethodSpec.methodBuilder("unBindView")
@@ -127,6 +130,7 @@ public class BindViewHandle extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+
         annotationClassHashMap.clear();
         for(Element element : roundEnvironment.getElementsAnnotatedWith(BindView.class)) {
             TypeElement typeElement = (TypeElement) element.getEnclosingElement();
