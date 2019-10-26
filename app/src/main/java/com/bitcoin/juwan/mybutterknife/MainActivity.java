@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.bitcoin.juwan.annotations.BindView;
+import com.bitcoin.juwan.annotations.onClick;
 import com.bitcoin.juwan.mybutterknife.fragment.ThirdActivity;
 import com.bitcoin.juwan.mybutterknife.test.SecondActivity;
 
@@ -24,24 +25,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MyButterKnife.init(this);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SecondActivity.class));
-            }
-        });
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ThirdActivity.class));
-            }
-        });
     }
 
     @Override
     protected void onDestroy() {
         MyButterKnife.unBind(this);
         super.onDestroy();
+    }
+
+    @onClick({R.id.main_text, R.id.main_button})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.main_text : {
+                startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                break;
+            }
+            case R.id.main_button : {
+                startActivity(new Intent(MainActivity.this, ThirdActivity.class));
+                break;
+            }
+        }
     }
 }
